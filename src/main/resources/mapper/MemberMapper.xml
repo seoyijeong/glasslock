@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ezen.bbs.mapper.MemberMapper">
+	<select id="memberList" resultType="memberDTO">
+		SELECT * FROM member
+	</select>
+
+
+	<insert id="memberInsert" parameterType="memberDTO">
+		INSERT INTO member(id, pw, name, age, email, tel, zipcode,
+		road_addr, jibun_addr, detail_addr)
+		VALUES( #{id},
+		#{pw},
+		#{name},
+		#{age},
+		#{email},
+		#{tel},
+		#{zipcode},
+		#{road_addr},
+		#{jibun_addr},
+		#{detail_addr}
+		)
+	</insert>
+
+	<select id="memberInfo" parameterType="Integer" resultType="memberDTO">
+		SELECT * FROM member WHERE no = #{no}
+	</select>
+
+	<update id="memberUpdate" parameterType="memberDTO">
+		UPDATE member SET age=#{age}, email=#{email}, tel=#{tel},
+		zipcode=#{zipcode}, road_addr=#{road_addr},
+		jibun_addr=#{jibun_addr}, detail_addr=#{detail_addr} WHERE no=#{no}
+	</update>
+
+	<delete id="memberDelete" parameterType="Integer">
+		DELETE FROM member WHERE no = #{no}
+	</delete>
+
+	<select id="idCheck" resultType="memberDTO">
+		SELECT * FROM member WHERE id=#{id}
+	</select>
+
+	<select id="memberLogin" resultType="memberDTO">
+		SELECT id, pw, name FROM member WHERE id=#{id}
+	</select>
+
+	<!--오라클의 nvl() :필드값이 없으면 0으로 //mysql : ifnull()-->
+	<select id="findId" resultType="String">
+		<!--아이디 가져오기 실패시 0-->
+		<!--아이디와 전화번호를 가져왔는데 정보가 없으면 id 값은 0으로 넣어주기-->
+		SELECT 	IFNULL(id,0) FROM member WHERE name =#{name} AND tel=#{tel}
+	</select>
+
+	<!--db 와 임시 비번을 넘기기 위해 Map으로 묶어서 보냄-->
+	<!--id(1), email(2), tempPw(3)-->
+	<update id="findPw" parameterType="Map">
+		UPDATE member SET pw=#{param3}
+		WHERE id=#{param1} AND email=#{param2}
+	</update>
+
+	<update id="updatePw">
+		UPDATE member SET pw=#{pw}
+	</update>
+</mapper>

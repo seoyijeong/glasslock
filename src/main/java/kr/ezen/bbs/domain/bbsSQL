@@ -1,0 +1,41 @@
+
+---------- admin login------------
+drop table tbl_admin;
+
+create table tbl_admin(
+    id varchar(20) not null,
+    password varchar(20) not null,
+    name varchar(20) not null,
+    email varchar(30) not null
+);
+insert into tbl_admin values('test', 'test', '홍길동', 'test@gmail.com');
+select * from tbl_admin;
+
+SELECT password FROM tbl_admin WHERE id ='test';
+
+commit;
+----------category add---------
+drop table category;
+
+create table category(
+    catNum int primary key auto_increment,
+    code varchar(10) not null,
+    catName varchar(20) not null
+);
+
+---------product ------------
+drop table product;
+
+create table product(
+    pnum int primary key auto_increment,
+    pname varchar(50) not null,
+    pcategory_fk varchar(30) not null,
+    pcompany varchar(50),
+    pimage varchar(50),
+    pqty  int default 0,
+    price int default 0,
+    pspec varchar(20),
+    pcontent varchar(300),
+    ppoint int default 0,
+    pinputDate datetime
+);
