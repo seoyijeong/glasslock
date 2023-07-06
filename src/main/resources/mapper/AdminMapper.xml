@@ -47,7 +47,26 @@
 	</select>
 
 	<update id="productUpdate">
-		UPDATE product SET  pname=#{pname},
+		UPDATE product SET
+		pname = #{pname},
+		pcategory_fk = #{pcategory_fk},
+		pcompany = #{pcompany},
+		pimage = #{pimage},
+		pqty = #{pqty} ,
+		price = #{price},
+		pspec = #{pspec},
+		pcontent = #{pcontent},
+		ppoint = #{ppoint},
+		pinputDate = #{pinputDate}
+		WHERE pnum=#{pnum}
 	</update>
+
+	<select id="prodInfo" resultType="productDTO">
+		SELECT * FROM product WHERE pnum=#{pnum}
+	</select>
+
+	<delete id="prodDelete" parameterType="Integer">
+		DELETE FROM product WHERE pnum = #{pnum}
+	</delete>
 
 </mapper>

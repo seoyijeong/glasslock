@@ -44,7 +44,7 @@
 						   name="pimage"/>
 					<!-- 이미지를 수정하지 않는 경우에는 지금 현재 이미지를 넘겨야 함. -->
 					<input type="hidden" class="form-control form-control-sm"
-						   name="pImageOld" value="${dto.pimage}"/>
+						   name="pimageOld" value="${dto.pimage}"/>
 				</td>
 			</tr>
 			<tr>
@@ -60,8 +60,13 @@
 			<tr>
 				<td>상품사양</td>
 				<td>
-					<input type="text" class="form-control form-control-sm"
-						   name="pspec" value="${dto.pspec}"/>
+					<select class="form-select form-select-sm" name="pspec">
+						<option value="none" selected>일반</option>
+						<c:forEach var="spec" items="${requestScope.pdSpecs}">
+							<%-- <%=spec.getValue() %> --%>
+							<option value="${spec.name()}">${spec.value}</option>
+						</c:forEach>
+					</select>
 				</td>
 			</tr>
 			<tr>

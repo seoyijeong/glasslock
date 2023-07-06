@@ -39,3 +39,19 @@ create table product(
     ppoint int default 0,
     pinputDate datetime
 );
+
+create table member(
+    no int primary key auto_increment,
+    id varchar(50) not null,
+    pw varchar(50) not null,
+    name varchar(50) not null,
+    age int not null,
+    -- birthday date not null,
+    email varchar(50) not null,
+    tel varchar(30) not null,
+    zipcode varchar(10),
+    road_addr varchar(200),
+    jibun_addr varchar(200),
+    detail_addr varchar(200),
+    unique key(id)
+);

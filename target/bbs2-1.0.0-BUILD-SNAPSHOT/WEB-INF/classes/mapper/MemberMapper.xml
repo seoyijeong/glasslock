@@ -12,7 +12,8 @@
 	<insert id="memberInsert" parameterType="memberDTO">
 		INSERT INTO member(id, pw, name, age, email, tel, zipcode,
 		road_addr, jibun_addr, detail_addr)
-		VALUES( #{id},
+		VALUES(
+		#{id},
 		#{pw},
 		#{name},
 		#{age},

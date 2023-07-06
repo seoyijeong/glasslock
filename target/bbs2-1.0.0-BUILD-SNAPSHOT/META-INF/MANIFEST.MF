@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
 Created-By: IntelliJ IDEA
-Built-By: YiJeong
-Build-Jdk: 11.0.18
+Built-By: Admin
+Build-Jdk: Eclipse Temurin version 11.0.18
 

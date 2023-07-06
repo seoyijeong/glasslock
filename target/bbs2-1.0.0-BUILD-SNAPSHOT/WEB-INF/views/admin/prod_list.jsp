@@ -54,7 +54,7 @@
 							<%--<c:url />은 context경로를 자동으로 붙여줌 --%>
 						<img src="<c:url value="/uploadedFile/${dto.pimage}"/>" style="width:60px"/>
 					</td>
-						<td>${dto.pnum}</td>
+						<td>${dto.pname}</td>
 						<td>${dto.price}</td>
 						<td>${dto.pcompany}</td>
 						<td>${dto.pqty}</td>
