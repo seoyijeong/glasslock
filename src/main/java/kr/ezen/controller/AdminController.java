@@ -106,12 +106,30 @@ public class AdminController {
         return "admin/prod_list";
     }
     @GetMapping("/prodUpdate.do")
-    public String productUpdate(ProductDTO dto){
-        service.productModify(dto);
+    public String productUpdate(Model model,int pnum){
+        List<CategoryDTO> categoryList = service.listCategory();
+        model.addAttribute("list",categoryList);
 
-        return "redirect:/admin/prod_list.do";
+        ProductDTO dto = service.prodInfo(pnum);
+        model.addAttribute("dto", dto);
+
+        ProdSpec[] pdSpecs = ProdSpec.values();
+        model.addAttribute("pdSpecs", pdSpecs);
+
+        return "admin/prod_update";
     }
+    @PostMapping("/prodUpdate.do")
+    public String productUpdate(MultipartHttpServletRequest mhr){
+        service.productModify(mhr);
 
-    
+        return "redirect:/admin/productList.do";
+    }
+    @GetMapping("/prodDelete.do")
+    public String prodDelete(int pnum) {
+
+        service.prodRemove(pnum);
+
+        return "redirect:/admin/productList.do";
+    }
 
 }
