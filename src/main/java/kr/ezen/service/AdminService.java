@@ -4,8 +4,6 @@ import kr.ezen.bbs.domain.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public interface AdminService {
@@ -24,7 +22,11 @@ public interface AdminService {
 
     List<ProductDTO> productList();
 
-    int productModify(ProductDTO dto);
+    int productModify(MultipartHttpServletRequest mhr);
+
+    ProductDTO prodInfo(int pnum);
+
+    int prodRemove(int pnum);
 }
 
 

@@ -175,8 +175,97 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int productModify(ProductDTO dto) {
-		return mapper.productUpdate();
+	public int productModify(MultipartHttpServletRequest mhr) {
+		System.out.println("상품수정 =====================");
+		String savePath = "/resources/uploadedFile";
+
+		String realPath = mhr.getServletContext().getRealPath(savePath);
+		System.out.println("realPath = " + realPath);
+
+		int maxsize = 1024*1024*10;
+
+		Map map= new HashMap();
+
+		Enumeration<String> enu = mhr.getParameterNames();
+
+		while(enu.hasMoreElements()) {
+			String paramName = enu.nextElement(); // 업로드 되는 파일의 이름
+			String paramValue = mhr.getParameter(paramName); // 파일의 실제 이름
+
+			// 이미지 수정시 처리 조건
+			if(paramName.equals("pimageOld")) {
+				paramName = "pimage";
+			}
+
+			System.out.println("~~~~~~~~~~~~~~ parameter output ~~~~~~~~~~");
+			System.out.println(paramName + ":" + paramValue);
+
+			// System.out.println(paramName + ":" + paramValue);
+			map.put(paramName, paramValue); // 데이터를 map에 저장
+		}
+
+		Iterator<String> iter = mhr.getFileNames();
+		while(iter.hasNext()) {
+			String fileParamName = iter.next(); // 업로드된 파일의 이름
+			System.out.println("fileParamName : " + fileParamName);
+
+
+			MultipartFile mFile = mhr.getFile(fileParamName);
+			String originName = mFile.getOriginalFilename();
+			System.out.println("~~ originName : " + originName);
+
+
+			File file = new File(realPath +"\\"+ fileParamName);
+
+			if(mFile.getSize() !=0) {
+				if (!file.exists()) { // 파일 존재여부 확인
+					if (file.getParentFile().mkdir()) { // 파일의 디렉토리 생성
+						try {
+							file.createNewFile(); // 임시 파일 생성
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+
+				File updateFile = new File(realPath + "\\" + originName);
+
+				if (updateFile.exists()) {
+					originName = System.currentTimeMillis()+"_"+originName;
+					updateFile = new File(realPath+"\\"+originName);
+				}
+
+				try {
+					mFile.transferTo(updateFile);
+				}catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				map.put(fileParamName, originName);
+
+
+			} // if
+
+		} // while
+
+		System.out.println("map : " + map);
+
+
+
+		return mapper.productUpdate(map);
 	}
+
+	@Override
+	public ProductDTO prodInfo(int pnum) {
+		return mapper.prodInfo(pnum);
+	}
+
+	@Override
+	public int prodRemove(int pnum) {
+		return mapper.prodDelete(pnum);
+	}
+
+
 }
+
 
