@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="container">
-    <div class="gnb_header_top">
+    <div class="gnb_header_top ">
         <div class="top_box_menu">
             <ul class="top_member_box">
                 <li>
@@ -36,7 +36,7 @@
         <%--상단 오른쪽 마이페이지,고객센터 등 end--%>
     </div> <%--gnb_header_top--%>
 
-    <div class="header_top">
+    <div class="header_top justify-content-between">
         <div class="h1_logo">
             <%--a href=클릭시 이동하는 경로--%>
             <a href="<c:url value="/"/>">
@@ -54,10 +54,10 @@
         </div>
 
 		<div class="gnb_category_right">
-			<ul>
-				<li><a href="#"><img src="/imgs/"></a></li>
-				<li><a href="#"><img src="/imgs/"></a></li>
-				<li class="category_cart"><a href="#"><img src="/imgs/"></a>
+			<ul class="d-flex">
+				<li><a href="#"><img src="imgs/wishlist_icon.png"></a></li>
+				<li><a href="<c:url value="/member/myProfile.do"/>"><img src="imgs/mypage_icon.png"></a></li>
+				<li class="category_cart"><a href="#"><img src="imgs/cart_icon.png"></a>
 					<p>0</p>
 				</li>
 			</ul>

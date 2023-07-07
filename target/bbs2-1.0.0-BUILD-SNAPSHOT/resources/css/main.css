@@ -27,12 +27,12 @@ li{
 	list-style:none;
 }
 /*header*/
-.header_top {
-
-}
-
 .h1_logo img {
 	width: 200px;
+}
+
+.gnb_category_right ul {
+	display: flex;
 }
 
 .top_box_menu{
@@ -67,7 +67,7 @@ li{
 
 .header_top{
 	display:flex;
-	/*	justify-content: space-between;*/
+	justify-content: space-between;
 	width: 100%;
 }
 

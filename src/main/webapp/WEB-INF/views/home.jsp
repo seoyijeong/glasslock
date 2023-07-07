@@ -1,3 +1,6 @@
+<%@ page import="kr.ezen.bbs.util.ProdSpec" %>
+<%@ page import="kr.ezen.bbs.domain.ProductDTO" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -46,10 +49,39 @@
 			<h2 id="remain-time"></h2>
 			<script src="js/app.js"></script>
 		</div>
+	</div>
 		<%--카운트 다운 end--%>
 
-		<div class="container">
+<%--	<c:if test="${requestScope.msg !=null}">
+		<script>
+			alert("${requestScope.msg}");
+		</script>
+	</c:if>--%>
 
+	<div class="container" >
+			<div class="container-fluid mt-3 px-5">
+				<br>
+				<h4>상품리스트</h4>
+				<c:forEach var="spec" items="${requestScope.pdSpecs}">
+
+					<c:forEach var="prod" items="${map}">
+
+						<c:if test="${spec.name() == prod.key}">
+							<p class="h2 mb-3">${spec.value}</p>
+							<div class="card-display d-flex mt-3">
+								<c:set var="key" value="${spec.name()}"/>
+								<c:set var="cnt" value="0" />
+									<%-- <c:set var="pDto" value="${map[key]}"/> ${pDto[0].price} --%>
+								<c:forEach var="dto" items="${map[key]}">
+									<%--    ${pDto}<br> --%>
+									<%@ include file="user/card.jsp"%>
+								</c:forEach>
+							</div>
+						</c:if><br/>
+					</c:forEach>
+				</c:forEach>
+
+			</div>
 		</div>
 
 
